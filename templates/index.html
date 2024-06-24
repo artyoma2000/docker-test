@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Generator</title>
+</head>
+<body>
+    <button id="generate">Generate and Save</button>
+    <button id="show">Show Accounts</button>
+
+    <script>
+        document.getElementById('generate').onclick = function() {
+            fetch('/generate', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Generated Login: ' + data.login + '\nGenerated Password: ' + data.password + '\n' + data.message);
+                });
+        };
+
+        document.getElementById('show').onclick = function() {
+            fetch('/accounts')
+                .then(response => response.json())
+                .then(data => {
+                    alert(JSON.stringify(data, null, 2));
+                });
+        };
+    </script>
+</body>
+</html>
